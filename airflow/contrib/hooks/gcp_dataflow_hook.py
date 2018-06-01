@@ -253,7 +253,9 @@ class DataFlowHook(GoogleCloudBaseHook):
                 "parameters": parameters,
                 "environment": environment}
         service = self.get_conn()
-        request = service.projects().templates().launch(projectId=variables['project'],
+
+        request = service.projects().locations().templates().launch(projectId=variables['project'],
+                                                        location=variables['region'],
                                                         gcsPath=dataflow_template,
                                                         body=body)
         response = request.execute()
